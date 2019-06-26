@@ -4,6 +4,10 @@ const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 
+/** @method assertsPath  生成静态资源的路径(判断开发环境和生产环境,为config文件中index.js文件中定义assetsSubDirectory)
+ * @param  {String}    _path 相对于静态资源文件夹的文件路径
+ * @return {String}          静态资源完整路径
+ */
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -29,6 +33,10 @@ exports.cssLoaders = function (options) {
     }
   }
 
+  /**@method generateLoaders  生成 ExtractTextPlugin对象或loader字符串
+   * @param  {Array}        loaders loader名称数组
+   * @return {String|Object}        ExtractTextPlugin对象或loader字符串
+   */
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
@@ -42,6 +50,7 @@ exports.cssLoaders = function (options) {
       })
     }
 
+    // ExtractTextPlugin提取css(当上面的loaders未能正确引入时,使用vue-style-loader)
     // Extract CSS when that option is specified
     // (which is the case during production build)
     if (options.extract) {
@@ -56,16 +65,20 @@ exports.cssLoaders = function (options) {
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
   return {
-    css: generateLoaders(),
-    postcss: generateLoaders(),
-    less: generateLoaders('less'),
-    sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
-    stylus: generateLoaders('stylus'),
-    styl: generateLoaders('stylus')
+    css: generateLoaders(),//需要css-loader 和 vue-style-loader
+    postcss: generateLoaders(),//需要css-loader、postcssLoader 和 vue-style-loader
+    less: generateLoaders('less'),//需要less-loader 和 vue-style-loader
+    sass: generateLoaders('sass', { indentedSyntax: true }),//需要sass-loader 和 vue-style-loader
+    scss: generateLoaders('sass'),//需要sass-loader 和 vue-style-loader
+    stylus: generateLoaders('stylus'),//需要stylus-loader 和 vue-style-loader
+    styl: generateLoaders('stylus')//需要stylus-loader 和 vue-style-loader
   }
 }
 
+/**@method styleLoaders 生成 style-loader的配置
+ * @param  {Object}     options 生成配置
+ * @return {Array}      style-loader的配置
+ */
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
   const output = []

@@ -1,0 +1,102 @@
+@import './utils/variable';
+@import './utils/mixins';
+
+.app {
+  @include position-absolute;
+  background: #fff;
+  min-width: 460px;
+}
+
+.app-main {
+  @include position-absolute($app-header-height, 0, 0, 0);
+  overflow: hidden;
+}
+
+.brand {
+  line-height: 1;
+
+  .brand-logo {
+    display: inline-block;
+    background-image: url('./assets/eg/logo.png');
+    background-position: 0 -28px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    width: 105px;
+    height: 60px;
+  }
+
+  .brand-txt {
+    color: #fff;
+    font-size: 24px;
+    font-style: italic;
+    height: 60px;
+    line-height: 60px;
+  }
+}
+
+.el-submenu .el-menu-item {
+  min-width: auto !important;
+}
+
+.el-menu {
+
+  [class^='eweb-'],
+  [class^='eweb-'] {
+    vertical-align: middle;
+    margin-right: 4px;
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+  }
+}
+
+.app-aside {
+  float: left;
+  height: 100%;
+  width: auto;
+  border-right: solid 1px #e6e6e6;
+  position: relative;
+  z-index: 1;
+
+  .el-menu {
+    border-right: none;
+  }
+
+  .aside-menu:not(.el-menu--collapse) {
+    width: $app-aside-width;
+  }
+  .aside-menu.el-menu--collapse {
+    width: 62px;
+  }
+}
+
+.app-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: $app-aside-width;
+  padding: 15px;
+  transition: left 0.3s ease-in-out;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.app-header,
+.app-footer {
+  width: 100%;
+  color: #fff;
+}
+
+.app-header {
+  height: $app-header-height;
+  background-color: $theme;
+}
+
+.app-footer {
+  height: $app-footer-height;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

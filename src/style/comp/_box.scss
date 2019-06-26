@@ -1,0 +1,116 @@
+@import '../utils/_variable.scss';
+
+// 功能块
+.box {
+  padding: 10px;
+  margin-bottom: 20px;
+
+  &-header {
+    padding: 4px 0 4px 10px;
+    margin-bottom: 15px;
+    border-left: 2px solid $theme;
+
+    &-tit {
+      font-weight: bold;
+      color: $theme;
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 980px) {
+    padding: 8px;
+    margin-bottom: 16px;
+
+    &-header {
+      padding: 4px 0 4px 8px;
+
+      &-tit {
+        font-size: 16px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 6px;
+    margin-bottom: 12px;
+
+    &-header {
+      padding: 4px 0 4px 8px;
+
+      &-tit {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+// 数据box
+.data-box {
+  padding: 12px;
+  background-color: $box-bgc;
+  margin-bottom: 15px;
+  min-height: 90px;
+  border-radius: $--border-radius-base;
+
+  &--tit {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  &--val {
+    color: darken($theme, 20%);
+    text-align: center;
+    display: block;
+    font-size: 26px;
+  }
+
+  @media screen and (max-width: 980px) {
+    padding: 10px;
+    min-height: 80px;
+
+    &--tit {
+      font-size: 14px;
+    }
+
+    &--val {
+      font-size: 24px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    min-height: 70px;
+
+    &--tit {
+      font-size: 13px;
+    }
+
+    &--val {
+      font-size: 20px;
+    }
+  }
+}
+
+// 表格头
+.table-header {
+  padding: 6px 10px;
+  background: #30baaf;
+
+  &-tit {
+    height: 32px;
+    line-height: 32px;
+    color: #fff;
+  }
+}
+
+// 分割线
+.split-v {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1px;
+  height: 14px;
+  color: darken(#efefef, 5%);
+  background-color: currentColor;
+  margin: 0 3px;
+}

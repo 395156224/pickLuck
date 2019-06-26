@@ -1,0 +1,233 @@
+@font-face {
+  font-family: 'eweb';
+  src:  url('fonts/eweb.ttf?1490it') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="eweb-"], [class*=" eweb-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'eweb' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: baseline;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.eweb-eye:before {
+  content: "\e900";
+}
+.eweb-menu-left:before {
+  content: "\e601";
+}
+.eweb-search:before {
+  content: "\e602";
+}
+.eweb-arrow-left:before {
+  content: "\e604";
+}
+.eweb-star:before {
+  content: "\e605";
+}
+.eweb-book:before {
+  content: "\e606";
+}
+.eweb-leave:before {
+  content: "\e607";
+}
+.eweb-net:before {
+  content: "\e60b";
+}
+.eweb-channel:before {
+  content: "\e60c";
+}
+.eweb-alarm:before {
+  content: "\e60f";
+}
+.eweb-back:before {
+  content: "\e610";
+}
+.eweb-phone:before {
+  content: "\e615";
+}
+.eweb-remove:before {
+  content: "\e617";
+}
+.eweb-doc:before {
+  content: "\e619";
+}
+.eweb-add:before {
+  content: "\e61b";
+}
+.eweb-user:before {
+  content: "\e627";
+}
+.eweb-check-people:before {
+  content: "\e628";
+}
+.eweb-warn:before {
+  content: "\e629";
+}
+.eweb-safe:before {
+  content: "\e62c";
+}
+.eweb-info:before {
+  content: "\e62d";
+}
+.eweb-idea:before {
+  content: "\e631";
+}
+.eweb-config:before {
+  content: "\e63f";
+}
+.eweb-arrow-down:before {
+  content: "\e667";
+}
+.eweb-arrow-up:before {
+  content: "\e668";
+}
+.eweb-password:before {
+  content: "\e674";
+}
+.eweb-fresh:before {
+  content: "\e681";
+}
+.eweb-home:before {
+  content: "\e691";
+}
+.eweb-list:before {
+  content: "\e6aa";
+}
+.eweb-dustbin:before {
+  content: "\e6ab";
+}
+.eweb-analyze:before {
+  content: "\e6d0";
+}
+.eweb-rate-down:before {
+  content: "\e6d1";
+}
+.eweb-type-hybird:before {
+  content: "\e6d2";
+}
+.eweb-dhcp:before {
+  content: "\e6d6";
+}
+.eweb-diagnosis-search:before {
+  content: "\e6d8";
+}
+.eweb-net-hot:before {
+  content: "\e6d9";
+}
+.eweb-net-conf:before {
+  content: "\e6dc";
+}
+.eweb-wifi-conf:before {
+  content: "\e6de";
+}
+.eweb-favorites:before {
+  content: "\e6e0";
+}
+.eweb-ap-conf:before {
+  content: "\e6e1";
+}
+.eweb-ap-manage:before {
+  content: "\e6e5";
+}
+.eweb-ac-manage:before {
+  content: "\e6e6";
+}
+.eweb-ac-conf:before {
+  content: "\e6ea";
+}
+.eweb-diagnosis:before {
+  content: "\e6f5";
+}
+.eweb-setting:before {
+  content: "\e6f8";
+}
+.eweb-ac:before {
+  content: "\e701";
+}
+.eweb-edit:before {
+  content: "\e716";
+}
+.eweb-ap:before {
+  content: "\e718";
+}
+.eweb-wifi:before {
+  content: "\e71b";
+}
+.eweb-book1:before {
+  content: "\e71c";
+}
+.eweb-check-empty:before {
+  content: "\e722";
+}
+.eweb-cpu:before {
+  content: "\e723";
+}
+.eweb-type-monitor:before {
+  content: "\e725";
+}
+.eweb-monitor:before {
+  content: "\e726";
+}
+.eweb-memory:before {
+  content: "\e729";
+}
+.eweb-log:before {
+  content: "\e735";
+}
+.eweb-daily:before {
+  content: "\e736";
+}
+.eweb-delete:before {
+  content: "\e74a";
+}
+.eweb-view:before {
+  content: "\e76a";
+}
+.eweb-maintain:before {
+  content: "\e79f";
+}
+.eweb-time:before {
+  content: "\e807";
+}
+.eweb-qrcode:before {
+  content: "\e901";
+}
+.eweb-port:before {
+  content: "\e905";
+}
+.eweb-rate-up:before {
+  content: "\e93b";
+}
+.eweb-help:before {
+  content: "\ea27";
+}
+.eweb-role:before {
+  content: "\ea64";
+}
+.eweb-arrow-down-fill:before {
+  content: "\ea65";
+}
+.eweb-menu-right:before {
+  content: "\ea66";
+}
+.eweb-arrow-right:before {
+  content: "\ea67";
+}
+.eweb-eye-show:before {
+  content: "\e9ce";
+}
+.eweb-eye-hide:before {
+  content: "\e9d1";
+}

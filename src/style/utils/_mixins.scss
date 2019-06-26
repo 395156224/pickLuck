@@ -1,0 +1,142 @@
+/*
+ * 常用mixins类
+ */
+
+/* 超出省略 */
+@mixin text-overflow($width: 0) {
+  overflow: hidden;
+
+  width: 100%-$width;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+%text-overflow {
+  @include text-overflow;
+}
+
+/* 禁用样式 */
+@mixin disabled($color: #e6e6e6,$bgColor:#ababab) {
+  border-color: darken($bgColor, 5%);
+
+  color: $color !important;
+  background-color: $bgColor !important;
+
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+%disabled {
+  @include disabled;
+}
+
+/* 垂直据中 */
+@mixin v-position($pos: middle) {
+  display: inline-block;
+
+  vertical-align: $pos;
+}
+
+%v-middle {
+  @include v-position(middle);
+}
+
+@mixin text-middle($px) {
+  height: $px;
+
+  line-height: $px;
+}
+
+/* 水平居中 */
+@mixin h-center {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+%h-center {
+  @include h-center;
+}
+
+/* 浮动 */
+@mixin float($position: left) {
+  float: $position;
+}
+
+%float-left {
+  @include float(left);
+}
+
+%float-right {
+  @include float(right);
+}
+
+/* 清除浮动 */
+@mixin clearfix {
+  &:before,
+  &:after {
+    display: table;
+
+    content: '';
+  }
+  &:after {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+%clearfix {
+  @include clearfix;
+}
+
+/* 绝对定位：默认居中 */
+@mixin position-absolute($top: 0,$right:0,$bottom:0,$left:0) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+%position-absolute {
+  @include position-absolute;
+}
+
+/* 透明度 */
+@mixin opacity($val: 50) {
+  opacity: $val/100 !important;
+
+  filter: alpha(opacity=$val) !important;
+}
+
+
+//箭头arrow(direction,size,color);
+@mixin arrow($direction, $size, $color) {
+  content: "";
+  width: 0;
+  height: 0;
+  line-height: 0;
+  font-size: 0;
+  overflow: hidden;
+  border-width: $size;
+  cursor: pointer;
+  @if $direction==top {
+      border-style: dashed dashed solid dashed;
+      border-color: transparent transparent $color transparent;
+      border-top: none;
+  }
+  @else if $direction==bottom {
+      border-style: solid dashed dashed dashed;
+      border-color: $color transparent transparent transparent;
+      border-bottom: none;
+  }
+  @else if $direction==right {
+      border-style: dashed dashed dashed solid;
+      border-color: transparent transparent transparent $color;
+      border-right: none;
+  }
+  @else if $direction==left {
+      border-style: dashed solid dashed dashed;
+      border-color: transparent $color transparent transparent;
+      border-left: none;
+  }
+}

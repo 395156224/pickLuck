@@ -33,7 +33,7 @@
 </template>
 <script>
 export default {
-  name: 'details',
+  name: 'Details',
   props: {
     timesDetails: {
       default: [],

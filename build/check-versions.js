@@ -1,25 +1,25 @@
 'use strict'
 const chalk = require('chalk')
-const semver = require('semver')
+const semver = require('semver')//检查版本
 const packageConfig = require('../package.json')
-const shell = require('shelljs')
+const shell = require('shelljs')//shelljs 模块重新包装了 child_process，调用系统命令更加方便
 
-function exec (cmd) {
+function exec (cmd) {//返回通过child_process模块的新建子进程，执行 Unix 系统命令后转成没有空格的字符串
   return require('child_process').execSync(cmd).toString().trim()
 }
 
 const versionRequirements = [
   {
     name: 'node',
-    currentVersion: semver.clean(process.version),
-    versionRequirement: packageConfig.engines.node
+    currentVersion: semver.clean(process.version),//使用semver格式化版本
+    versionRequirement: packageConfig.engines.node//获取package.json中设置的node版本
   }
 ]
 
 if (shell.which('npm')) {
   versionRequirements.push({
     name: 'npm',
-    currentVersion: exec('npm --version'),
+    currentVersion: exec('npm --version'),// 自动调用npm --version命令，并且把参数返回给exec函数，从而获取纯净的版本号
     versionRequirement: packageConfig.engines.npm
   })
 }
@@ -29,7 +29,7 @@ module.exports = function () {
 
   for (let i = 0; i < versionRequirements.length; i++) {
     const mod = versionRequirements[i]
-
+    //若版本号不符合package.json文件中指定的版本号，就报错
     if (!semver.satisfies(mod.currentVersion, mod.versionRequirement)) {
       warnings.push(mod.name + ': ' +
         chalk.red(mod.currentVersion) + ' should be ' +
