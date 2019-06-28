@@ -53,10 +53,10 @@ module.exports = {
   build: {
     // 编译后“首页面”生成的绝对路径和名字
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../docs/index.html'),
     // Paths
     // 打包编译的根路径（默认dist,存放打包压缩后的代码）
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../docs'),
     // 静态资源文件夹（一般存放css、js、image等文件）
     assetsSubDirectory: 'static',
     // 发布的根目录（dist文件夹所在路径）
