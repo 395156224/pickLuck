@@ -95,7 +95,7 @@ export default {
       return _res
     },
     timesFilter() {
-      return (this.timesArr || []).filter(o => this.typeList.includes(o.type))
+      return (this.timesArr || []).filter(o => this.typeList.includes(o.type)).sort((a, b) => b.count - a.count)
     },
     sumTimes() {
       let _sum = {}
@@ -189,13 +189,13 @@ export default {
               }
               this.log(
                 `${a.expect}期-第${ballNum + 1}球-${strVal}, ${
-                  otype.name
+                otype.name
                 }-连期${_curTime[ballNum].count}`
               )
             } else if (!!_curTime[ballNum]) {
               this.log(
                 `${a.expect}期-第${ballNum + 1}球-${strVal}, ${
-                  otype.name
+                otype.name
                 }-不符合`
               )
               //　结束连期，记录连期信息

@@ -70,11 +70,11 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="详细" width="100">
+        <!-- <el-table-column align="left" label="详细" width="100">
           <template slot-scope="{row}">
             <details :timesDetails="row.details"></details>
           </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column align="left" label="参考建议" min-width="300">
           <template slot-scope="{row}">
             <div>
@@ -166,14 +166,14 @@
 // import 'echarts/lib/component/legendScroll'
 // import 'echarts/lib/component/tooltip'
 // import 'echarts/lib/component/title'
-import Details from '../components/Details'
+// import Details from '@/components/Details'
 
 import luckMixins from '@/mixins/luckMixins'
 import pageMixins from '@/mixins/pageMixins'
 import STATIC_DATA from '../../config/lucky'
 import allData from '@/data/index'
 import { getHistory } from '@/api/api'
-debugger
+
 export default {
   name: 'Lucky',
   data() {
@@ -188,9 +188,9 @@ export default {
     }
   },
   mixins: [luckMixins, pageMixins],
-  components: {
-    Details
-  },
+  // components: {
+  //   Details
+  // },
   created() {},
   mounted() {
     // this.chart = echarts.init(this.$el.lastElementChild)
