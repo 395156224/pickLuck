@@ -60,7 +60,7 @@ module.exports = {
     // 静态资源文件夹（一般存放css、js、image等文件）
     assetsSubDirectory: 'static',
     // 发布的根目录（dist文件夹所在路径）
-    assetsPublicPath: '/',
+    assetsPublicPath: './', // 选择相对路径 ./发布到 ./static/xxx，否则git上资源加载错误！
 
     /**
      * Source Maps
