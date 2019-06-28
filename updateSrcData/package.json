@@ -1,0 +1,13 @@
+{
+  "name": "upadteSrcData",
+  "version": "1.0.0",
+  "description": "update src data",
+  "main": "index.js",
+  "author": "lgh",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "gulp": "^4.0.2",
+    "qs": "^6.7.0"
+  }
+}

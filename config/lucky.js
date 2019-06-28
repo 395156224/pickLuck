@@ -14,20 +14,20 @@ module.exports = {
 			"secondsPerTime": 1200,
 			"tips": "10:00am-次日02:00"
 		},
-		"tjssc": {
-			"lotteryId": 14,
-			"lotteryName": "天津时时彩",
-			"timesPerDay": 42,
-			"secondsPerTime": 1200,
-			"tips": "09:00am-23:00pm"
-		},
-		"hljssc": {
-			"lotteryId": 41,
-			"lotteryName": "黑龙江时时彩",
-			"timesPerDay": 42,
-			"secondsPerTime": 1200,
-			"tips": "08:50am-22:40pm"
-		},
+		// "tjssc": {
+		// 	"lotteryId": 14,
+		// 	"lotteryName": "天津时时彩",
+		// 	"timesPerDay": 42,
+		// 	"secondsPerTime": 1200,
+		// 	"tips": "09:00am-23:00pm"
+		// },
+		// "hljssc": {
+		// 	"lotteryId": 41,
+		// 	"lotteryName": "黑龙江时时彩",
+		// 	"timesPerDay": 42,
+		// 	"secondsPerTime": 1200,
+		// 	"tips": "08:50am-22:40pm"
+		// },
 		"bjssc": {
 			"lotteryId": 51,
 			"lotteryName": "北京幸运5",
@@ -70,13 +70,16 @@ module.exports = {
 			"secondsPerTime": 300,
 			"tips": "冬19：30-次日17：30； 夏：18:30-次日16:30"
 		},
-		"btc1fc": {
-			"lotteryId": 45,
-			"lotteryName": "比特币1分彩",
-			"timesPerDay": 1440,
-			"secondsPerTime": 60,
-			"tips": "00:01-24:00"
-		},
+		// "btc1fc": {
+		// 	"lotteryId": 45,
+		// 	"lotteryName": "比特币1分彩",
+		// 	"timesPerDay": 1440,
+		// 	"secondsPerTime": 60,
+		// 	"tips": "00:01-24:00"
+		// },
+
+
+
 		// "ynssc": {
 		// 	"lotteryId": 15,
 		// 	"lotteryName": "云南时时彩",
@@ -183,10 +186,10 @@ module.exports = {
 		// 	"lotteryName": "湖南快乐十分",
 		// 	"timesPerDay": 59
 		// },
-		"mock": {
-			"lotteryId": 0,
-			"lotteryName": "模拟数据",
-			"timesPerDay": 59
-		}
+		// "mock": {
+		// 	"lotteryId": 0,
+		// 	"lotteryName": "模拟数据",
+		// 	"timesPerDay": 59
+		// }
 	}
   }

@@ -1,26 +1,27 @@
 <template>
   <div class="view-wrap">
     <el-menu
-      default-active="cqssc"
       @select="handleSelect"
       active-text-color="#ffd04b"
       background-color="#545c64"
       class="el-menu-demo"
+      default-active="cqssc"
       mode="horizontal"
       text-color="#fff"
     >
-      <el-menu-item v-for="(o, k) in lottery_data" :key="k" :index="k">{{o.lotteryName}}</el-menu-item>
+      <el-menu-item :index="k" :key="k" v-for="(o, k) in lottery_data" v-loading.fullscreen.lock="isLoading">{{o.lotteryName}}</el-menu-item>
     </el-menu>
 
     <div class="box">
       <div class="box-header">
         <span class="box-header-tit">
-          存有<strong class="c-warning mlr5">{{totalDays}}</strong>天数据，
+          存有
+          <strong class="c-warning mlr5">{{totalDays}}</strong>天数据(每天
+          <strong>{{curLottery.timesPerDay || "-" }}</strong>期)，
           查看最近
-          <el-select class="w80" placeholder="请选择" v-model="days">
-            <el-option :key="day" :label="day" :value="day" v-for="day in 50"></el-option>
-          </el-select>
-          天数据（
+          <el-select class="w80" placeholder="请选择" size="small" v-model="days">
+            <el-option :key="day" :label="day" :value="day" v-for="day in 31"></el-option>
+          </el-select>天数据（
           <span class="c-info">
             <strong class="c-warning">{{this.cutHistory.length}}</strong>期
           </span>）
@@ -43,7 +44,7 @@
             <span :class="{'c-danger': row.time > 4}">{{row.time}}期</span>
           </template>
         </el-table-column>
-        <el-table-column align="left" label="连期/结束" width="80">
+        <el-table-column align="left" label="连期/结束" width="100">
           <template slot-scope="{row}">
             <div>
               连期
@@ -169,13 +170,16 @@ import Details from '../components/Details'
 
 import luckMixins from '@/mixins/luckMixins'
 import pageMixins from '@/mixins/pageMixins'
-import STATIC_DATA from '../config'
-import allData from '../data'
-
+import STATIC_DATA from '../../config/lucky'
+import allData from '@/data/index'
+import { getHistory } from '@/api/api'
+debugger
 export default {
-  name: 'Cqssc',
+  name: 'Lucky',
   data() {
     return {
+      isLoading: false,
+      fetchByNet: false,
       MOCK_NUM: 10,
       lottery_data: STATIC_DATA.lottery_data,
       days: 1,
@@ -191,46 +195,77 @@ export default {
   mounted() {
     // this.chart = echarts.init(this.$el.lastElementChild)
   },
+  watch: {
+    timesFilter() {
+      //　更新期数列表
+      this._initPage()
+    }
+  },
   methods: {
     _loadList() {
       return this.timesFilter || []
     },
-    handleSelect(v, path) {
+    async handleSelect(v, path) {
       // this.$router.push({ name: index, query: { day: 3, type: [1,2,3] } })
-      this.curLottery = this.lottery_data[v] || {}
-      let _name = this.curLottery.lotteryName || '模拟数据'
-
       if (v === 'mock') {
         // 模拟数据
-        this.history = Array.from({ length: this.MOCK_NUM }).map((_, i) => {
-          return {
-            expect: `20190610_${i}`,
-            openCode: Math.floor(Math.random() * 100000)
-              .toString()
-              .padLeft(5, '0')
-              .split('')
-              .join(',')
-          }
-        })
-      } else {
-        let _data = allData[v]
-        if (!_data || !_data.openCodeList) {
-          return this.$message.error('无相关数据！')
+        this.history = {
+          message: '获取数据成功',
+          openCodeList: Array.from({ length: _num }).map((_, i) => {
+            return {
+              expect: `20190610_${i}`,
+              openCode: Math.floor(Math.random() * 100000)
+                .toString()
+                .padLeft(5, '0')
+                .split('')
+                .join(',')
+            }
+          }),
+          sign: true
         }
-        this.history = [
-          {
-            expect: '本期未开',
-            openCode: '?,?,?,?,?'
-          },
-          ..._data.openCodeList
-        ].reverse()
-      }
-      this.$message.info(
-        `加载【${_name}】最近${this.totalDays}天数据，共计 ${this.totalCount} 期，`
-      )
+      } else {
+        const _curLottery = this.lottery_data[v] || {}
+        this.curLottery = _curLottery
+        let _num = _curLottery.timesPerDay * this.days
 
-      //　更新期数列表
-      this._initPage()
+        if (this.fetchByNet) {
+          this.isLoading = true
+          try {
+            var _res = await getHistory({
+              lid: _curLottery.lotteryId,
+              num: _num
+            })
+            _res.openCodeList.forEach((o, i) => {
+              delete o.openTime
+              delete o.remark
+              delete o.sourceCode
+            })
+          } catch (error) {
+            console.log('获取失败！')
+          } finally {
+            this.isLoading = false
+          }
+          this.$message.info({
+            message: `加载【${this.curLottery.lotteryName || '模拟数据'}】最近${
+              this.days //this.totalDays
+            }天数据，共计 ${_num} 期`, //this.totalCount} 期`,
+            duration: 1000
+          })
+        } else { // 从本地数据库data中读取
+          _res = allData[v]
+        }
+      }
+      let _data = _res
+      if (!_data || !_data.openCodeList) {
+        return this.$message.error('无相关数据！')
+      }
+      this.history = [
+        {
+          expect: '本期未开',
+          openCode: '?,?,?,?,?'
+        },
+        ..._data.openCodeList
+      ].reverse()
     }
   }
 }
