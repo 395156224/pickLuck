@@ -20,16 +20,25 @@ gulp.task('fetchData', async done => {
   for (let name in lottery_data) {
     console.log(name)
     let o = lottery_data[name]
-    let _res = await fetch.post(`/Trend/Histroy`, {
-      lid: o.lotteryId,
-      num: o.timesPerDay * 30
-    })
-    _res.openCodeList.forEach((o, i) => {
-      delete o.openTime
-      delete o.remark
-      delete o.sourceCode
-    })
-    writeFile(`${DATA_DIR}/${name}`, _res)
+    try {
+      let _res = await fetch.post(`/Trend/Histroy`, {
+        lid: o.lotteryId,
+        num: o.timesPerDay * 30
+      })
+      if (_res && typeof _res.openCodeList) {
+        _res.openCodeList.forEach((o, i) => {
+          delete o.openTime
+          delete o.remark
+          delete o.sourceCode
+        })
+        writeFile(`${DATA_DIR}/${name}`, _res)
+      } else {
+        console.log("数据获取异常", _res)
+      }
+    } catch (error) {
+      console.log("数据获取异常")
+      continue
+    }
   }
   done()
 })

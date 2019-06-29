@@ -24,6 +24,19 @@ export default {
           code: 4,
           name: '双',
           fn: v => v % 2 === 0
+        },
+        isPrime: {
+          code: 12,
+          name: '质',
+          fn: v => {
+            debugger
+            return [1, 2, 3, 5, 7].includes(+v)
+          }
+        },
+        isNotPrime: {
+          code: 13,
+          name: '合',
+          fn: v => [0, 4, 6, 8, 9].includes(+v)
         }
       },
       TYPE2: {
@@ -87,9 +100,7 @@ export default {
       // 统计所有连期数
       let _res = []
       Object.keys(this.TYPE).forEach((t, i) => {
-        const _ot = this.TYPE[t]
-        this.log(`==== 开始统计 ${_ot.name} ====`)
-        let _tmp = this._sumTimes(_ot, this.cutHistory)
+        let _tmp = this._sumTimes(t, this.cutHistory)
         _res = _res.concat(_tmp)
       })
       return _res
@@ -155,15 +166,17 @@ export default {
     }
   },
   methods: {
-    _sumTimes(otype, sumData = this.cutHistory) {
+    _sumTimes(t, sumData = this.cutHistory) {
       let _timesArr = [],
         _curTime = [] // 0-4记录单球， 5-11记录总和龙虎
 
+      const otype = this.TYPE[t]
+      this.log(`==== 开始统计 ${otype.name} ====`)
       sumData.forEach((a, i, oa) => {
         let _codeArr = a.openCode.split(',')
 
-        if (otype.code < 5) {
-          // 大小单双
+        if (this.TYPE1[t]) {
+          // 大小单双质合
           _codeArr.forEach((strVal, ballNum) => {
             let v = +strVal
 
