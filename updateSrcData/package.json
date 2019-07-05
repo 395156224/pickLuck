@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "lgh",
   "license": "MIT",
+  "scripts": {
+    "update": "gulp fetchData"
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "gulp": "^4.0.2",

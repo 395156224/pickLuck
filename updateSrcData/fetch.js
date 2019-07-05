@@ -2,7 +2,7 @@ let axios = require('axios')
 let QS = require('qs') // 引入qs模块，用来序列化post类型的数据，后面会提到
 
 // 环境的切换
-axios.defaults.baseURL = 'https://p.tw0606.com' //'https://p.cn0909.com'
+axios.defaults.baseURL = 'https://p.uk7708.com' //'https://p.cn0909.com'
 axios.defaults.timeout = 0;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
