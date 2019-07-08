@@ -16,15 +16,18 @@
       <div class="box-header">
         <span class="box-header-tit">
           存有
-          <strong class="c-warning mlr5">{{totalDays}}</strong>天数据(每天
-          <strong>{{curLottery.timesPerDay || "-" }}</strong>期)，
-          查看最近
+          <strong class="c-warning">{{totalDays}}</strong>
+          天数据(每天
+          <strong class="c-warning">{{curLottery.timesPerDay || "-" }}</strong>
+          期)，查看最近
           <el-select class="w80" placeholder="请选择" size="small" v-model="days">
             <el-option :key="day" :label="day" :value="day" v-for="day in 31"></el-option>
-          </el-select>天数据（
-          <span class="c-info">
-            <strong class="c-warning">{{this.cutHistory.length}}</strong>期
-          </span>）
+          </el-select>
+          天数据（
+          <strong class="c-warning">{{cutHistory.length}}期</strong>
+          )，数据更新到
+          <strong class="c-warning">{{currentExpect ? currentExpect.expect : "-"}}</strong>
+          期。
         </span>
       </div>
       <div class="mb5">
@@ -74,7 +77,7 @@
           <template slot-scope="{row}">
             <details :timesDetails="row.details"></details>
           </template>
-        </el-table-column> -->
+        </el-table-column>-->
         <el-table-column align="left" label="参考建议" min-width="300">
           <template slot-scope="{row}">
             <div>
@@ -137,11 +140,11 @@
         </el-table-column>
         <el-table-column align="center" label="结束期数" prop="endExpect" sortable width="110">
           <template slot-scope="{row}">
-            <span class="c-success">{{row.endExpect}}</span>
+            <span :class="row.isLastExpect ? 'c-danger' : 'c-success'">{{row.endExpect}}</span>
           </template>
         </el-table-column>
         <el-table-column align="center" label="开奖号" prop="openCode" width="90"></el-table-column>
-        <el-table-column align="left" label="时间">
+        <el-table-column align="left" label="开奖时间">
           <template slot-scope="{row}">{{row.timeTip}}</template>
         </el-table-column>
       </el-table>
@@ -251,7 +254,8 @@ export default {
             }天数据，共计 ${_num} 期`, //this.totalCount} 期`,
             duration: 1000
           })
-        } else { // 从本地数据库data中读取
+        } else {
+          // 从本地数据库data中读取
           _res = allData[v]
         }
       }

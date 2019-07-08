@@ -29,7 +29,6 @@ export default {
           code: 12,
           name: '质',
           fn: v => {
-            debugger
             return [1, 2, 3, 5, 7].includes(+v)
           }
         },
@@ -95,6 +94,9 @@ export default {
     },
     cutHistory() {
       return this.history.slice(-1 - this.curLottery.timesPerDay * this.days)
+    },
+    currentExpect() {
+      return this.cutHistory[this.cutHistory.length - 2]
     },
     timesArr() {
       // 统计所有连期数
@@ -196,9 +198,13 @@ export default {
               } else {
                 _curTime[ballNum].count++
                 _curTime[ballNum].valArr.push(v)
-                // _curTime[ballNum].endExpect = a.expect
+                _curTime[ballNum].endExpect = a.expect
                 _curTime[ballNum].openCode = a.openCode
                 _curTime[ballNum].expectArr.push(a.expect)
+
+                if (this.currentExpect.expect === a.expect) {
+                  _curTime[ballNum].isLastExpect = true
+                }
               }
               this.log(
                 `${a.expect}期-第${ballNum + 1}球-${strVal}, ${
@@ -213,7 +219,8 @@ export default {
               )
               //　结束连期，记录连期信息
               if (_curTime[ballNum].count >= 2) {
-                _timesArr.push({ endExpect: a.expect, ..._curTime[ballNum] })
+                let _timeTip = this._getTimeTip(_curTime[ballNum].endExpect)
+                _timesArr.push({ timeTip: _timeTip, ..._curTime[ballNum] })
               }
               delete _curTime[ballNum]
             }
@@ -230,7 +237,8 @@ export default {
                 ballNum: '12345', // 第几球
                 type: otype.name, // 连期类型
                 expectArr: [a.expect],
-                valArr: [a.openCode]
+                valArr: [a.openCode],
+                endExpect: a.expect
                 // timeTip: '上午'
                 // date: '20190610'
                 // today: true,
@@ -239,24 +247,46 @@ export default {
             } else {
               _curTime[ballNum].count++
               _curTime[ballNum].valArr.push(a.openCode)
-              // _curTime[ballNum].endExpect = a.expect
+              _curTime[ballNum].endExpect = a.expect
               _curTime[ballNum].openCode = a.openCode
               _curTime[ballNum].expectArr.push(a.expect)
+
+              if (this.currentExpect.expect === a.expect) {
+                _curTime[ballNum].isLastExpect = true
+              }
             }
             this.log(
               `${a.expect}期, ${otype.name}-连期${_curTime[ballNum].count}`
             )
           } else if (!!_curTime[ballNum]) {
             this.log(`${a.expect}期, ${otype.name}-不符合`)
+
             //　结束连期，记录连期信息
             if (otype.code === 11 || _curTime[ballNum].count >= 2) {
-              _timesArr.push({ endExpect: a.expect, ..._curTime[ballNum] })
+              let  _timeTip = this._getTimeTip(_curTime[ballNum].endExpect)
+              _timesArr.push({ timeTip: _timeTip, ..._curTime[ballNum] })
             }
             delete _curTime[ballNum]
           }
         }
       })
       return _timesArr
+    },
+    _getTimeTip(endExpect, expectArr=[]) {
+      let _y = endExpect.substring(0, 4)
+      let _m = endExpect.substring(4, 6)
+      let _d = endExpect.substring(6, 8)
+      let _date = endExpect.substring(0, 8)
+      let _exp = Number(endExpect.substring(8))
+      let _mins = _exp * 20 + 10 + 2// 基于零点的分钟, 封盘时间-3，开奖时间+2
+
+      if (_mins > (3 * 60 + 10)) { // 大于3:10
+        _mins += 4 * 60
+      }
+
+      let _h = Math.floor(_mins / 60)
+      let _min = _mins % 60
+      return `${_y} ${_m}/${_d} ${_h}:${_min}` //new Date(`${_y} ${_m} ${_d} ${_h}:${_min}`).toLocaleString()
     },
     log(msg) {
       debug && console.log(msg)
