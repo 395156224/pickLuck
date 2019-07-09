@@ -276,9 +276,8 @@ export default {
       let _y = endExpect.substring(0, 4)
       let _m = endExpect.substring(4, 6)
       let _d = endExpect.substring(6, 8)
-      let _date = endExpect.substring(0, 8)
       let _exp = Number(endExpect.substring(8))
-      let _mins = _exp * 20 + 10 + 2// 基于零点的分钟, 封盘时间-3，开奖时间+2
+      let _mins = _exp * 20 + 10 + 2  // 基于零点的分钟, 封盘时间-3，开奖时间+2
 
       if (_mins > (3 * 60 + 10)) { // 大于3:10
         _mins += 4 * 60
@@ -287,6 +286,20 @@ export default {
       let _h = Math.floor(_mins / 60)
       let _min = _mins % 60
       return `${_y} ${_m}/${_d} ${_h}:${_min}` //new Date(`${_y} ${_m} ${_d} ${_h}:${_min}`).toLocaleString()
+    },
+    testTimeTip() {
+      var res = []
+      for (var i = 1; i< 60; i++) {
+        let _exp = i.toString().padStart(3, 0)
+        let _m = (new Date().getMonth()+1).toString().padStart(2, 0)
+        let _d = (new Date().getDate()).toString().padStart(2, 0)
+        let _exps = `2019${_m}${_d}${_exp}`
+        res.push({
+          i: _exp,
+          time: this._getTimeTip(_exps)
+        })
+      }
+      console.table(res)
     },
     log(msg) {
       debug && console.log(msg)

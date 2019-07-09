@@ -194,7 +194,9 @@ export default {
   // components: {
   //   Details
   // },
-  created() {},
+  created() {
+    window.testTimeTip = this.testTimeTip
+  },
   mounted() {
     // this.chart = echarts.init(this.$el.lastElementChild)
   },
