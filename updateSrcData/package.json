@@ -9,7 +9,7 @@
     "update": "gulp fetchData"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "gulp": "^4.0.2",
     "qs": "^6.7.0"
   },
